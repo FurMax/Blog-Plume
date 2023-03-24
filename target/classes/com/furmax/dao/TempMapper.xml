@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.furmax.dao.TempMapper">
+    <select id="queryAllBooks" resultType="Books">
+        select *
+        from blogsystem.books;
+    </select>
+
+    <select id="queryBookByISBNAndBookName" resultType="Books" parameterType="String">
+        select *
+        from blogsystem.books
+        where 1=1
+        <if test="ISBN!=null">and ISBN=#{ISBN}</if>
+        <if test="bookName!=null">and bookName=#{bookName}</if>
+    </select>
+
+    <update id="decreaseBooksStock" >
+        update blogsystem.books
+        set bookCounts=#{bookCounts}
+        where bookId=#{bookId};
+    </update>
+
+    <update id="increaseBooksStock">
+        update blogsystem.books
+        set bookCounts=#{bookCounts}
+        where bookId=#{bookId};
+    </update>
+
+    <update id="updateBook" parameterType="Books">
+        update blogsystem.books
+        set ISBN=#{ISBN},bookCounts=#{bookCounts},bookSum=#{bookSum}
+        where bookName=#{bookName};
+    </update>
+
+    <delete id="deleteBook" parameterType="int">
+        delete from blogsystem.books
+        where bookId=#{bookId};
+    </delete>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.furmax.dao.SubareaMapper">
+    <select id="queryArticlesBySubareaName" parameterType="String" resultType="Article">
+        select *
+        from blogsystem.article
+        where subareaName=#{subareaName};
+    </select>
+    <select id="queryArticlesSubareaIdBySubareaName" parameterType="String" resultType="int">
+        select subareaId
+        from blogsystem.subarea
+        where subareaName=#{subareaName};
+    </select>
+
+    <select id="queryArticlesNumBySubareaName" parameterType="String" resultType="int">
+        select count(*)
+        from blogsystem.article
+        where subareaName=#{subareaName};
+    </select>
+</mapper>

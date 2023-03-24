@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.furmax.dao.BlogMapper">
+    <insert id="insertOneBlog" parameterType="Blog">
+        insert into blogsystem.blog (blogTitle,blogContent,blogTag,createTime,blogMaster,blogSummary) values (#{blogTitle},#{blogContent},#{blogTag},#{createTime},#{blogMaster},#{blogSummary});
+    </insert>
+
+    <delete id="deleteBlog" parameterType="int">
+        delete from  blogsystem.blog where blogId= #{blogId};
+    </delete>
+
+
+    <update id="updateBlog" parameterType="Blog">
+        update blogsystem.blog
+        set
+        blogTitle=#{blogTitle},
+        blogContent=#{blogContent},
+        blogTag=#{blogTag},
+        createTime=#{createTime},
+        modifyTime=#{modifyTime},
+        blogMaster=#{blogMaster}
+        where blogId=#{blogId};
+    </update>
+
+    <select id="selectOneBlog" resultType="Blog" >
+        select * from blogsystem.blog
+        where blogId=#{blogId};
+    </select>
+
+    <select id="queryAllBlogs" resultType="Blog" >
+        select * from blogsystem.blog;
+    </select>
+
+    <select id="getAllTag" resultType="BlogTag">
+        select * from blogsystem.blogtag;
+    </select>
+
+    <select id="queryBlogsByBlogMaster" resultType="Blog" parameterType="String">
+        select * from blogsystem.blog
+        where blogMaster=#{blogMaster}
+        order by createTime desc;
+    </select>
+</mapper>

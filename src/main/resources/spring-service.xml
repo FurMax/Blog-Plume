@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 扫描service相关的bean -->
+    <context:component-scan base-package="com.furmax.service" />
+
+
+
+    <!--UserServiceImpl注入到IOC容器中-->
+    <bean id="UserServiceImpl" class="com.furmax.service.UserServiceImpl">
+        <property name="userMapper" ref="userMapper" />
+    </bean>
+    <!--BlogServiceImpl注入到IOC容器中-->
+    <bean id="BlogServiceImpl" class="com.furmax.service.BlogServiceImpl">
+        <property name="blogMapper" ref="blogMapper" />
+    </bean>
+
+
+    <bean id="BlogCommentServiceImpl" class="com.furmax.service.BlogCommentServiceImpl">
+        <property name="blogCommentMapper" ref="blogCommentMapper"/>
+    </bean>
+
+    <bean id="BlogTagServiceImpl" class="com.furmax.service.BlogTagServiceImpl">
+        <property name="blogTagMapper" ref="blogTagMapper" />
+    </bean>
+
+    <bean id="ArticleServiceImpl" class="com.furmax.service.ArticleServiceImpl">
+        <property name="articleMapper" ref="articleMapper"/>
+    </bean>
+
+    <bean id="ArticleSubareaServiceImpl" class="com.furmax.service.ArticleSubareaServiceImpl">
+        <property name="subareaMapper" ref="subareaMapper"/>
+    </bean>
+
+    <bean id="ArticleCommentServiceImpl" class="com.furmax.service.ArticleCommentServiceImpl">
+        <property name="commentMapper" ref="commentMapper"/>
+    </bean>
+
+    <bean id="TempServiceImpl" class="com.furmax.service.TempServiceImpl">
+        <property name="tempMapper" ref="tempMapper"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>

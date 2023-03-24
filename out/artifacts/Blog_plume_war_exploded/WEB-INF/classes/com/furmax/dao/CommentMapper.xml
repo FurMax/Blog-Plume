@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.furmax.dao.CommentMapper">
+    <select id="queryCommentsByArticleId" resultType="ArticleComment" parameterType="int">
+        select * from blogsystem.articlecomment where articleId=#{articleId};
+    </select>
+
+    <select id="queryCommentsBySupCommentsId" resultType="ArticleComment" parameterType="int">
+        select * from blogsystem.articlecomment where supId=#{supId};
+    </select>
+
+    <select id="queryAllComments" resultType="ArticleComment">
+        select * from blogsystem.articlecomment
+    </select>
+
+    <insert id="insertComment" parameterType="ArticleComment">
+        insert into blogsystem.articlecomment (userId,createTime,content,articleId,commentId,supId)
+        values (#{userId},#{createTime},#{content},#{articleId},#{commentId},#{supId})
+    </insert>
+
+    <select id="queryCommentsNumByArticleId" parameterType="int" resultType="int">
+        select count(*) from blogsystem.articlecomment where articleId=#{articleId}; ;
+    </select>
+
+</mapper>

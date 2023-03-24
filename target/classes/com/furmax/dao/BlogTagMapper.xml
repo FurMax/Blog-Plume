@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.furmax.dao.BlogTagMapper">
+    <select id="queryBlogsByBlogTag" resultType="Blog" parameterType="String">
+        select *
+        from blogsystem.blog
+        where blogTag=#{blogTag};
+    </select>
+
+    <select id="queryBlogTagByTagName" resultType="int" parameterType="String">
+        select tagId
+        from blogsystem.blogtag
+        where tagName=#{tagName};
+    </select>
+
+    <select id="queryBlogsNumByBlogTag" resultType="int" parameterType="String">
+        select count(*)
+        from blogsystem.blog
+        where blogTag=#{blogTag};
+    </select>
+</mapper>

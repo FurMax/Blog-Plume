@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.furmax.dao.ArticleMapper">
+    <select id="queryAllArticles" resultType="Article">
+        select *
+        from blogsystem.article
+        order by createTime;
+    </select>
+
+    <select id="queryAllArticlesBySubareaId" resultType="Article" parameterType="String">
+        select *
+        from blogsystem.article
+        where subareaName=#{subareaName};
+    </select>
+
+    <select id="queryOneArticleByArticleId" resultType="Article" parameterType="int">
+        select *
+        from blogsystem.article
+        where articleId=#{articleId};
+    </select>
+
+    <select id="queryAllArticlesBySubareaIdOrderByCommentsNum" resultType="Article" parameterType="String">
+        select *
+        from blogsystem.article
+        where subareaName=#{subareaName}
+        order by commentsNum desc;
+    </select>
+
+    <select id="queryAllArticlesBySubareaIdOrderByLikesNum" resultType="Article" parameterType="String">
+        select *
+        from blogsystem.article
+        where subareaName=#{subareaName}
+        order by likesNum desc;
+    </select>
+
+    <select id="queryAllArticlesByArticleCreator" resultType="Article" parameterType="String">
+        select *
+        from blogsystem.article
+        where articleCreator=#{articleCreator};
+    </select>
+
+    <select id="queryAllArticlesByCreateTime" resultType="Article">
+        select *
+        from blogsystem.article
+        where subareaName=#{subareaName}
+        order by createTime desc;
+    </select>
+
+    <insert id="insertOneArticle" parameterType="Article">
+        insert into blogsystem.article(articleId,articleTitle,articleContent,articleCreator,subareaName,createTime,modifyTime)
+        values(#{articleId},#{articleTitle},#{articleContent},#{articleCreator},#{subareaName},#{createTime},#{modifyTime});
+    </insert>
+
+    <update id="updateOneArticle" parameterType="Article">
+        update blogsystem.article
+        set
+        articleTitle=#{articleTitle},
+        articleContent=#{articleContent},
+        articleCreator=#{articleCreator},
+        subareaName=#{subareaName},
+        createTime=#{createTime},
+        modifyTime=#{modifyTime},
+        likesNum=#{likesNum},
+        commentsNum=#{commentsNum}
+        where articleId=#{articleId};
+    </update>
+
+    <delete id="deleteOneArticle" parameterType="int">
+        delete from blogsystem.article
+        where articleId=#{articleId};
+    </delete>
+
+    <select id="fuzzySearchArticles" resultType="Article" parameterType="String">
+        select *
+        from blogsystem.article
+        where articleTitle like #{articleTitle};
+    </select>
+
+    <select id="getAllSubarea" resultType="Subarea">
+        select *
+        from blogsystem.subarea;
+    </select>
+
+    <select id="querySubareaIdBySubareaName" resultType="int" parameterType="String">
+        select subareaId
+        from blogsystem.subarea
+        where subareaName=#{subareaName};
+    </select>
+
+    <update id="updateCommentsNumByArticleId" parameterType="int">
+        update blogsystem.article
+        set
+        commentsNum=#{commentsNum}
+        where articleId=#{articleId}
+    </update>
+
+</mapper>

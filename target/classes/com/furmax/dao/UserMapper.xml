@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.furmax.dao.UserMapper">
+    <insert id="insertUser" parameterType="User">
+        insert into blogsystem.user (userId,userName,password,userEmail) values (#{userId},#{userName},#{password},#{userEmail});
+    </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from  blogsystem.user where userId= #{userId};
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update blogsystem.user
+        set
+        userName=#{userName},
+        password=#{password},
+        userEmail=#{userEmail}
+        where userId=#{userId};
+    </update>
+
+    <select id="selectUser" resultType="User" >
+        select * from blogsystem.user
+        where userId=#{userId};
+    </select>
+
+    <select id="selectUserByUserName" resultType="User">
+        select * from blogsystem.user
+        where userName=#{userName};
+    </select>
+
+    <select id="selectUserByUserEmail" resultType="User">
+        select * from blogsystem.user
+        where userEmail=#{userEmail};
+    </select>
+
+    <select id="selectAllUser" resultType="User" >
+        select * from blogsystem.user;
+    </select>
+</mapper>
